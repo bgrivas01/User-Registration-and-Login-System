@@ -13,9 +13,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor //creates contructor for all my "final feilds"
 public class SecurityConfig {
 
-    //PasswordEncoder is a interface used to hash passwords
-    private final PasswordEncoder passwordEncoder; //since we have @RequiredArgsContructor we dont need to make a contructor for this
-
     //code below defines all security rules
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception { 
