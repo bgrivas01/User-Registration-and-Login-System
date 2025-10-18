@@ -10,18 +10,19 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
-@RequiredArgsConstructor
+@RequiredArgsConstructor //creates contructors for our "final" fields
 public class AuthController {
     private final UserService userService;
     private final AuthenticationManager authenticationManager;
 
-    @PostMapping("/register")
+    @PostMapping("/register") //add a user with there info to our database(basically we are registering a new account)
     public String register(@RequestBody User user) {
         userService.registerUser(user);
         return "User registered successfully!";
     }
 
-    @PostMapping("/login")
+    
+    @PostMapping("/login") //this basically checks if our user trying to log in is valid, it doesnt actually log them in 
     public String login(@RequestBody User user) {
         try {
             Authentication authentication = authenticationManager.authenticate(
