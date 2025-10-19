@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "users")
+@Table(name = "users")  //makes it so a table names users is created
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,3 +28,4 @@ public class User {
     private String role = "USER";
 }
 
+//the table will have an id value, a email value, a password value, and a role value which defaults to USER
