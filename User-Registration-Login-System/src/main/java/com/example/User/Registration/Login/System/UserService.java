@@ -15,6 +15,14 @@ public class UserService {
         return userRepository.save(user); //saves info of user to database
     }
 
+    public String loginUser(String email, String rawPassword){
+        User user = userRepository.findByEmail(email);
+        if(user != null && passweordEncoder.matches(rawPassword, user.getPassword())){
+            return jwtUtil.generateToekn(email);
+        }
+        return null;
+    }
+    
     public User findByEmail(String email) {//method used to find a user by their email
         return userRepository.findByEmail(email).orElse(null);
     }
