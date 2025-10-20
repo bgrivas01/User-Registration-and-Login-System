@@ -22,15 +22,14 @@ public class AuthController {
     }
 
     
-    @PostMapping("/login") //this basically checks if our user trying to log in is valid, it doesnt actually log them in 
-    public String login(@RequestBody User user) {
-        try {
-            Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword())
-            );
-            return "Login successful for user: " + authentication.getName();
-        } catch (AuthenticationException e) {
-            return "Invalid credentials!";
-        }
+  @PostMapping("/login")
+public ResponseEntity<?> login(@RequestBody User user) {
+    String token = userService.loginUser(user.getEmail(), user.getPassword());
+    if (token != null) {
+        return ResponseEntity.ok(Map.of("message", "Login successful", "token", token));
+    } else {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(Map.of("message", "Invalid email or password"));
     }
+}
 }
